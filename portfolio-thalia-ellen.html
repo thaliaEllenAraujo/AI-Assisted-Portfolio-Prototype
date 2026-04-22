@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thalia Ellen — Desenvolvedora Full Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f7f4;
+    --bg2: #ffffff;
+    --text: #1a1a1a;
+    --text2: #555;
+    --text3: #888;
+    --accent: #1a5c45;
+    --accent2: #2e8b69;
+    --accent-light: #e6f4ee;
+    --accent-mid: #b2d8c7;
+    --border: #e2dfd6;
+    --border2: #d0ccc2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow2: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,247,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 0.875rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 0.4rem 1.1rem;
+    border-radius: 100px;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent2) !important; color: #fff !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 2rem 4rem;
+    max-width: 1100px; margin: 0 auto;
+    gap: 4rem;
+  }
+  .hero-text { flex: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--accent-mid);
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent2);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text2);
+    margin-bottom: 2rem;
+    max-width: 520px;
+    font-weight: 300;
+  }
+  .hero-contacts {
+    display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem;
+  }
+  .hero-contacts a {
+    display: flex; align-items: center; gap: 0.4rem;
+    text-decoration: none; color: var(--text2);
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .hero-contacts a:hover { color: var(--accent); }
+  .hero-contacts .icon {
+    width: 16px; height: 16px; opacity: 0.6;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 0.75rem 1.75rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent);
+    padding: 0.75rem 1.75rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1.5px solid var(--accent-mid);
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--accent); background: var(--accent-light); transform: translateY(-1px); }
+
+  .hero-stats {
+    flex: 0 0 auto;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .stat-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    min-width: 160px;
+  }
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text3);
+    margin-top: 0.3rem;
+    font-weight: 400;
+  }
+
+  /* SECTION LAYOUT */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-desc {
+    color: var(--text2);
+    margin-top: 0.75rem;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* SOBRE */
+  #sobre { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .sobre-text p {
+    color: var(--text2);
+    margin-bottom: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .sobre-text p strong { color: var(--text); font-weight: 500; }
+  .sobre-skills { display: flex; flex-direction: column; gap: 1.5rem; }
+  .skill-group-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .pill {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent-mid);
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  .pill.gray {
+    background: #f0ede6;
+    color: #666;
+    border-color: #ddd;
+  }
+
+  /* PROJETOS */
+  #projetos { background: var(--bg); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover { transform: translateY(-3px); box-shadow: var(--shadow2); }
+
+  /* IMAGE PLACEHOLDER */
+  .project-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-mid) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+  }
+  .project-image.has-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    opacity: 0.7;
+  }
+  .image-placeholder svg { width: 32px; height: 32px; }
+  .image-placeholder span { font-size: 0.8rem; font-weight: 500; }
+  .image-upload-input {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .image-hover-overlay {
+    position: absolute; inset: 0;
+    background: rgba(26,92,69,0.85);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    gap: 0.4rem;
+    pointer-events: none;
+  }
+  .project-image:hover .image-hover-overlay { opacity: 1; }
+
+  .project-body { padding: 1.25rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+  .project-company {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+  .project-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--text2);
+    line-height: 1.7;
+    font-weight: 300;
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .tag {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    background: #f0ede6;
+    color: #666;
+    font-weight: 400;
+  }
+
+  /* HIGHLIGHT CARDS (Saúde + Conscius) */
+  .project-card.highlight {
+    border-color: var(--accent-mid);
+    border-width: 1.5px;
+  }
+  .project-card.highlight .project-company { color: var(--accent); }
+  .highlight-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  /* SAÚDE GRID — 7 sistemas */
+  .saude-section { margin-top: 3rem; }
+  .saude-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .saude-label {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .saude-icon {
+    width: 36px; height: 36px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .saude-icon svg { width: 18px; height: 18px; fill: #fff; }
+  .saude-title-text {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .saude-subtitle {
+    font-size: 0.8rem;
+    color: var(--text3);
+  }
+  .saude-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .saude-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow);
+  }
+  .saude-card:hover { transform: translateY(-2px); box-shadow: var(--shadow2); }
+  .saude-card-img {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, var(--accent-light), var(--accent-mid));
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; cursor: pointer;
+    border-bottom: 1px solid var(--border);
+  }
+  .saude-card-img.has-image img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .saude-card-body { padding: 1rem 1.25rem; }
+  .saude-card-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  .saude-card-desc {
+    font-size: 0.82rem;
+    color: var(--text2);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* EXPERIÊNCIA */
+  #experiencia { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-left { padding-top: 0.2rem; }
+  .timeline-period {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-company {
+    font-size: 0.85rem;
+    color: var(--text3);
+    font-weight: 300;
+  }
+  .timeline-right {}
+  .timeline-role {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .timeline-desc {
+    font-size: 0.875rem;
+    color: var(--text2);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+
+  /* FORMAÇÃO */
+  #formacao { background: var(--bg); }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .edu-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .edu-degree {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .edu-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+  .edu-school {
+    font-size: 0.82rem;
+    color: var(--text3);
+    font-weight: 300;
+  }
+  .edu-period {
+    font-size: 0.75rem;
+    color: var(--text3);
+    margin-top: 0.5rem;
+  }
+  .edu-status {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 100px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent-mid);
+    font-weight: 500;
+  }
+
+  /* CONTATO */
+  #contato {
+    background: var(--accent);
+    color: #fff;
+    border-top: none;
+  }
+  #contato .section-tag { color: rgba(255,255,255,0.6); }
+  #contato .section-title { color: #fff; }
+  #contato .section-title em { color: rgba(255,255,255,0.7); }
+  #contato .section-desc { color: rgba(255,255,255,0.7); }
+  .contact-grid {
+    display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.2); }
+  .contact-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.8); flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+  }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  footer a:hover { color: rgba(255,255,255,0.8); }
+
+  /* HAMBURGER MOBILE */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 0; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; gap: 2rem; padding-top: 80px; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .stat-card { min-width: 120px; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .timeline-left { padding-top: 0; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem 1.5rem;
+      gap: 1rem;
+    }
+    .hamburger { display: flex; }
+    section { padding: 3rem 1.25rem; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-text > * { animation: fadeUp 0.6s ease both; }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-subtitle { animation-delay: 0.3s; }
+  .hero-contacts { animation-delay: 0.4s; }
+  .hero-actions { animation-delay: 0.5s; }
+  .hero-stats { animation: fadeUp 0.6s 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Thalia Ellen</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#experiencia">Experiência</a></li>
+    <li><a href="#formacao">Formação</a></li>
+    <li><a href="#contato" class="nav-cta">Contato</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 0;">
+  <div class="hero">
+    <div class="hero-text">
+      <span class="hero-badge">Disponível para oportunidades</span>
+      <h1>Thalia <em>Ellen</em><br>Araujo do Amaral</h1>
+      <p class="hero-subtitle">Desenvolvedora Web Full Stack com mais de 5 anos de experiência — da modelagem UX/UI no Figma até o deploy em produção.</p>
+      <div class="hero-contacts">
+        <a href="mailto:thaliaellenaraujo@gmail.com">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          thaliaellenaraujo@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/thalia-ellen" target="_blank">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/thalia-ellen
+        </a>
+        <a href="https://github.com/thaliaEllenAraujo" target="_blank">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/thaliaEllenAraujo
+        </a>
+        <a href="#">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Canindé, CE — Remoto & Presencial
+        </a>
+      </div>
+      <div class="hero-actions">
+        <a href="#projetos" class="btn-primary">Ver projetos</a>
+        <a href="#contato" class="btn-secondary">Entrar em contato</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-number">5+</span>
+        <span class="stat-label">anos de experiência</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">sistemas entregues</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">7</span>
+        <span class="stat-label">sistemas na saúde pública</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <div class="section-header">
+          <span class="section-tag">Sobre mim</span>
+          <h2 class="section-title">Do zero ao <em>deploy</em></h2>
+        </div>
+        <p>Sou desenvolvedora Full Stack com mais de <strong>5 anos de experiência</strong> em projetos de software para empresas privadas e setor público. Trabalho com frontend, backend e infraestrutura — entrego sistemas completos do zero.</p>
+        <p>Na Secretaria Municipal de Saúde de Canindé, desenvolvi e implantei <strong>toda a infraestrutura digital</strong> da instituição, criando 7 sistemas web que substituíram processos manuais em papel, impactando diretamente a gestão de pacientes, documentos e controle de acessos.</p>
+        <p>Tenho experiência também com <strong>visão computacional</strong> (OpenCV, Google Cloud Vision), integração de APIs de pagamento e desenvolvimento de aplicativos mobile com Flutter.</p>
+      </div>
+      <div class="sobre-skills">
+        <div>
+          <p class="skill-group-label">Frontend</p>
+          <div class="skill-pills">
+            <span class="pill">React.js</span>
+            <span class="pill">Next.js</span>
+            <span class="pill">Angular</span>
+            <span class="pill">Flutter</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">SASS/SCSS</span>
+            <span class="pill">Figma / UI-UX</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">Backend</p>
+          <div class="skill-pills">
+            <span class="pill">Node.js</span>
+            <span class="pill">Python</span>
+            <span class="pill">Express</span>
+            <span class="pill">Prisma ORM</span>
+            <span class="pill">APIs REST</span>
+            <span class="pill">MySQL</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">DevOps / Infra</p>
+          <div class="skill-pills">
+            <span class="pill">Linux (Ubuntu Server)</span>
+            <span class="pill">Nginx</span>
+            <span class="pill">PM2</span>
+            <span class="pill">Vercel</span>
+            <span class="pill">CI/CD</span>
+            <span class="pill">Git / GitHub</span>
+          </div>
+        </div>
+        <div>
+          <p class="skill-group-label">Outros</p>
+          <div class="skill-pills">
+            <span class="pill gray">OpenCV</span>
+            <span class="pill gray">Google Cloud Vision</span>
+            <span class="pill gray">Raspberry Pi</span>
+            <span class="pill gray">Jest</span>
+            <span class="pill gray">SCRUM / Jira</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Portfólio</span>
+      <h2 class="section-title">Projetos em <em>destaque</em></h2>
+      <p class="section-desc">Sistemas desenvolvidos e entregues em produção ao longo da carreira. Clique nas imagens para adicionar capturas de tela.</p>
+    </div>
+
+    <!-- CONSCIUS + OUTROS DESTAQUES -->
+    <div class="projects-grid">
+
+      <!-- CONSCIUS MANAGER -->
+      <div class="project-card highlight">
+        <div class="project-image" id="img-conscius">
+          <span class="highlight-badge">Destaque</span>
+          <div class="image-placeholder" id="ph-conscius">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span>Adicionar imagem</span>
+          </div>
+          <div class="image-hover-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Enviar imagem
+          </div>
+          <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-conscius','ph-conscius')">
+        </div>
+        <div class="project-body">
+          <p class="project-company">DARM · Mobile</p>
+          <h3 class="project-name">Conscius Manager</h3>
+          <p class="project-desc">Aplicativo mobile em Flutter para gerenciamento de plataforma GPON da Furukawa Electric. Interface de gestão de rede de fibra óptica passiva, permitindo controle e monitoramento de ativos da infraestrutura de telecomunicações.</p>
+          <div class="project-tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Mobile</span>
+            <span class="tag">APIs REST</span>
+            <span class="tag">Adobe XD</span>
+            <span class="tag">GPON</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYROUTE -->
+      <div class="project-card">
+        <div class="project-image" id="img-payroute">
+          <div class="image-placeholder" id="ph-payroute">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span>Adicionar imagem</span>
+          </div>
+          <div class="image-hover-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Enviar imagem
+          </div>
+          <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-payroute','ph-payroute')">
+        </div>
+        <div class="project-body">
+          <p class="project-company">Automação.com · Fintech</p>
+          <h3 class="project-name">Payroute</h3>
+          <p class="project-desc">Hub de pagamentos com integração a múltiplas adquirentes. Atuei no frontend em React.js, UI/UX no Adobe XD e participação no backend em Node.js para o processamento de transações financeiras.</p>
+          <div class="project-tags">
+            <span class="tag">React.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Adobe XD</span>
+            <span class="tag">APIs Pagamento</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTREGOU.ME -->
+      <div class="project-card">
+        <div class="project-image" id="img-entregou">
+          <div class="image-placeholder" id="ph-entregou">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span>Adicionar imagem</span>
+          </div>
+          <div class="image-hover-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Enviar imagem
+          </div>
+          <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-entregou','ph-entregou')">
+        </div>
+        <div class="project-body">
+          <p class="project-company">Automação.com · Marketplace</p>
+          <h3 class="project-name">Entregou.me</h3>
+          <p class="project-desc">Desenvolvimento do frontend de marketplace em React.js com foco em performance e experiência de usuário. Interface responsiva e otimizada para múltiplos dispositivos.</p>
+          <div class="project-tags">
+            <span class="tag">React.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">SASS</span>
+            <span class="tag">APIs REST</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANÁLISE DE ENERGIA -->
+      <div class="project-card">
+        <div class="project-image" id="img-energia">
+          <div class="image-placeholder" id="ph-energia">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span>Adicionar imagem</span>
+          </div>
+          <div class="image-hover-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Enviar imagem
+          </div>
+          <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-energia','ph-energia')">
+        </div>
+        <div class="project-body">
+          <p class="project-company">DARM · IA & Visão Computacional</p>
+          <h3 class="project-name">Análise de Contas de Energia</h3>
+          <p class="project-desc">Backend em Python para extração automatizada de dados de imagens e PDFs de contas de energia elétrica com frontend em Angular. Utiliza visão computacional para leitura e processamento dos documentos.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Angular</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">PDF Parsing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROL SLEEP -->
+      <div class="project-card">
+        <div class="project-image" id="img-sleep">
+          <div class="image-placeholder" id="ph-sleep">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span>Adicionar imagem</span>
+          </div>
+          <div class="image-hover-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Enviar imagem
+          </div>
+          <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-sleep','ph-sleep')">
+        </div>
+        <div class="project-body">
+          <p class="project-company">IFCE Canindé · Premiado</p>
+          <h3 class="project-name">Control Sleep</h3>
+          <p class="project-desc">Aplicativo mobile com Android e Google Cloud Vision para detecção de sonolência em motoristas em tempo real. Projeto premiado pela ABRIC 2018, representando o Ceará no Campeonato Estadual de Feiras de Ciência.</p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Android</span>
+            <span class="tag">Google Cloud Vision</span>
+            <span class="tag">Raspberry Pi</span>
+            <span class="tag">OpenCV</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SISTEMAS DE SAÚDE -->
+    <div class="saude-section">
+      <div class="saude-header">
+        <div class="saude-label">
+          <div class="saude-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div>
+            <p class="saude-title-text">Ecossistema da Saúde · Canindé</p>
+            <p class="saude-subtitle">7 sistemas desenvolvidos do zero para a Secretaria Municipal de Saúde</p>
+          </div>
+        </div>
+        <span style="font-size:0.78rem;color:var(--text3);font-weight:300;">Jan 2025 – presente</span>
+      </div>
+
+      <div class="saude-grid">
+
+        <!-- 1 -->
+        <div class="saude-card">
+          <div class="saude-card-img" id="img-s1">
+            <div class="image-placeholder" id="ph-s1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span>Adicionar imagem</span>
+            </div>
+            <div class="image-hover-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Enviar imagem
+            </div>
+            <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-s1','ph-s1')">
+          </div>
+          <div class="saude-card-body">
+            <p class="saude-card-name">Saúde Documentada</p>
+            <p class="saude-card-desc">Geração e gestão de documentos oficiais com assinatura digital integrada, eliminando a necessidade de impressão.</p>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="saude-card">
+          <div class="saude-card-img" id="img-s2">
+            <div class="image-placeholder" id="ph-s2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span>Adicionar imagem</span>
+            </div>
+            <div class="image-hover-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Enviar imagem
+            </div>
+            <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-s2','ph-s2')">
+          </div>
+          <div class="saude-card-body">
+            <p class="saude-card-name">Saúde Rápida</p>
+            <p class="saude-card-desc">Controle de passagens para pacientes em deslocamento intermunicipal, com página pública de consulta via mobile.</p>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="saude-card">
+          <div class="saude-card-img" id="img-s3">
+            <div class="image-placeholder" id="ph-s3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span>Adicionar imagem</span>
+            </div>
+            <div class="image-hover-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Enviar imagem
+            </div>
+            <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-s3','ph-s3')">
+          </div>
+          <div class="saude-card-body">
+            <p class="saude-card-name">Saúde Marcada</p>
+            <p class="saude-card-desc">Gestão de procedimentos cirúrgicos e filas de pacientes, substituindo o controle manual por armários físicos.</p>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="saude-card">
+          <div class="saude-card-img" id="img-s4">
+            <div class="image-placeholder" id="ph-s4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span>Adicionar imagem</span>
+            </div>
+            <div class="image-hover-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Enviar imagem
+            </div>
+            <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-s4','ph-s4')">
+          </div>
+          <div class="saude-card-body">
+            <p class="saude-card-name">Saúde Direcionada</p>
+            <p class="saude-card-desc">Triagem baseada em sintomas para direcionamento do paciente à unidade de saúde adequada.</p>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="saude-card">
+          <div class="saude-card-img" id="img-s5">
+            <div class="image-placeholder" id="ph-s5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span>Adicionar imagem</span>
+            </div>
+            <div class="image-hover-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Enviar imagem
+            </div>
+            <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-s5','ph-s5')">
+          </div>
+          <div class="saude-card-body">
+            <p class="saude-card-name">SASC</p>
+            <p class="saude-card-desc">Sistema de avaliação anual de desempenho de servidores públicos da saúde municipal.</p>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="saude-card">
+          <div class="saude-card-img" id="img-s6">
+            <div class="image-placeholder" id="ph-s6">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span>Adicionar imagem</span>
+            </div>
+            <div class="image-hover-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Enviar imagem
+            </div>
+            <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-s6','ph-s6')">
+          </div>
+          <div class="saude-card-body">
+            <p class="saude-card-name">HUB da Saúde</p>
+            <p class="saude-card-desc">Controle e administração de acessos dos usuários a todos os sistemas da secretaria.</p>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="saude-card">
+          <div class="saude-card-img" id="img-s7">
+            <div class="image-placeholder" id="ph-s7">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span>Adicionar imagem</span>
+            </div>
+            <div class="image-hover-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Enviar imagem
+            </div>
+            <input type="file" accept="image/*" class="image-upload-input" onchange="handleImageUpload(this,'img-s7','ph-s7')">
+          </div>
+          <div class="saude-card-body">
+            <p class="saude-card-name">Saúde Conectada</p>
+            <p class="saude-card-desc">Portal de acesso centralizado a todos os serviços digitais da secretaria municipal.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIÊNCIA -->
+<section id="experiencia">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Trajetória</span>
+      <h2 class="section-title">Experiência <em>profissional</em></h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <p class="timeline-period">Jan 2025 — Atual</p>
+          <p class="timeline-company">Secretaria Municipal<br>de Saúde de Canindé</p>
+        </div>
+        <div class="timeline-right">
+          <h3 class="timeline-role">Desenvolvedora Full Stack</h3>
+          <p class="timeline-desc">Responsável pela digitalização completa da infraestrutura tecnológica da secretaria, que operava exclusivamente com processos físicos. Desenvolveu 7 sistemas web do zero e configurou toda a infraestrutura de servidor da instituição com Linux, Nginx e PM2. Responsável também por todo o design de interfaces no Figma.</p>
+          <div class="timeline-tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Prisma</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Nginx</span>
+            <span class="tag">Figma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <p class="timeline-period">Set 2021 — Ago 2023</p>
+          <p class="timeline-company">Automação.com<br>(Remoto)</p>
+        </div>
+        <div class="timeline-right">
+          <h3 class="timeline-role">Desenvolvedora Frontend & Backend</h3>
+          <p class="timeline-desc">Desenvolveu o frontend do marketplace Entregou.me e atuou no frontend e backend do hub de pagamentos Payroute, com integração a múltiplas adquirentes. Responsável também pelo UI/UX no Adobe XD.</p>
+          <div class="timeline-tags">
+            <span class="tag">React.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">SASS</span>
+            <span class="tag">Adobe XD</span>
+            <span class="tag">MySQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <p class="timeline-period">Jan 2020 — Jul 2022</p>
+          <p class="timeline-company">DARM<br>(Remoto)</p>
+        </div>
+        <div class="timeline-right">
+          <h3 class="timeline-role">Desenvolvedora Frontend & Backend</h3>
+          <p class="timeline-desc">Atuou em projetos de diferentes frentes tecnológicas: análise automatizada de contas de energia com visão computacional, aplicativo mobile para gestão de plataforma GPON (Conscius Manager) e plataforma de gestão de manutenção de iluminação pública (MOBIT).</p>
+          <div class="timeline-tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Angular</span>
+            <span class="tag">React.js</span>
+            <span class="tag">Python</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Adobe XD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <p class="timeline-period">Ago 2018 — Dez 2018</p>
+          <p class="timeline-company">IFCE Canindé</p>
+        </div>
+        <div class="timeline-right">
+          <h3 class="timeline-role">Estagiária de Desenvolvimento</h3>
+          <p class="timeline-desc">Co-desenvolveu o aplicativo Control Sleep, sistema de detecção de sonolência em motoristas por visão computacional em tempo real. Projeto premiado pela ABRIC 2018 e representou o Ceará no Campeonato Estadual de Feiras de Ciência.</p>
+          <div class="timeline-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Android</span>
+            <span class="tag">Google Cloud Vision</span>
+            <span class="tag">OpenCV</span>
+            <span class="tag">Raspberry Pi</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORMAÇÃO -->
+<section id="formacao">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Educação</span>
+      <h2 class="section-title">Formação <em>acadêmica</em></h2>
+    </div>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <p class="edu-degree">Pós-Graduação Lato Sensu</p>
+        <h3 class="edu-name">Perícia Forense Computacional</h3>
+        <p class="edu-school">Faculdade de Minas</p>
+        <p class="edu-period">Nov 2025 — Em andamento</p>
+        <span class="edu-status">Em andamento</span>
+      </div>
+
+      <div class="edu-card">
+        <p class="edu-degree">Pós-Graduação Lato Sensu</p>
+        <h3 class="edu-name">Engenharia de Software</h3>
+        <p class="edu-school">Faculdade Descomplica</p>
+        <p class="edu-period">Dez 2019 — Ago 2025</p>
+        <span class="edu-status" style="background:#f0ede6;color:#666;border-color:#ddd;">Concluído</span>
+      </div>
+
+      <div class="edu-card">
+        <p class="edu-degree">Graduação Tecnológica</p>
+        <h3 class="edu-name">Redes de Computadores</h3>
+        <p class="edu-school">IFCE — Instituto Federal do Ceará</p>
+        <p class="edu-period">2019 — 2023</p>
+        <span class="edu-status" style="background:#f0ede6;color:#666;border-color:#ddd;">Concluído</span>
+      </div>
+
+      <div class="edu-card">
+        <p class="edu-degree">Curso Técnico</p>
+        <h3 class="edu-name">Informática</h3>
+        <p class="edu-school">E.E.E.P. José Vidal Alves</p>
+        <p class="edu-period">2016 — 2018</p>
+        <span class="edu-status" style="background:#f0ede6;color:#666;border-color:#ddd;">Concluído</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Vamos conversar</span>
+      <h2 class="section-title">Entre em <em>contato</em></h2>
+      <p class="section-desc">Aberta a oportunidades remotas e presenciais. Sinta-se à vontade para entrar em contato.</p>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:thaliaellenaraujo@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2"/></svg>
+        thaliaellenaraujo@gmail.com
+      </a>
+      <a href="tel:+5585989958252" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.55a2 2 0 0 1 1.98-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.97a16 16 0 0 0 6.08 6.08l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (85) 98995-8252
+      </a>
+      <a href="https://linkedin.com/in/thalia-ellen" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/thaliaEllenAraujo" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Thalia Ellen Araujo do Amaral · Desenvolvido com cuidado ·
+    <a href="mailto:thaliaellenaraujo@gmail.com">thaliaellenaraujo@gmail.com</a>
+  </p>
+</footer>
+
+<script>
+  // HAMBURGER
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // IMAGE UPLOAD
+  function handleImageUpload(input, containerId, placeholderId) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const container = document.getElementById(containerId);
+      const placeholder = document.getElementById(placeholderId);
+      if (placeholder) placeholder.style.display = 'none';
+      const existingImg = container.querySelector('img');
+      if (existingImg) { existingImg.src = e.target.result; return; }
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;';
+      container.insertBefore(img, container.firstChild);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // SMOOTH SCROLL OFFSET (fixed nav)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
