@@ -1,12 +1,15 @@
-# AI-Assisted Portfolio Prototype
+# Protótipo de portfólio assistido por IA
 
 Este repositório representa um experimento prático de **desenvolvimento assistido por Inteligência Artificial**, com foco em produtividade, prototipação rápida e validação técnica.
 
 O objetivo foi avaliar como ferramentas de IA podem acelerar a construção de interfaces e reduzir significativamente o tempo de entrega de uma primeira versão funcional.
 
 ---
+## Resultado Obtido
 
-## Objective
+Link do portfólio gerado: https://labs-thaliaellen-dev.vercel.app/
+
+## Objetivo
 
 A proposta inicial foi solicitar a geração de um **portfólio profissional em Angular**.
 
@@ -22,7 +25,7 @@ Mais do que apenas obter um resultado visual, o foco deste teste foi validar:
 
 ---
 
-## Technical Analysis
+## Análise Técnica
 
 Embora a stack solicitada não tenha sido seguida integralmente, a IA foi capaz de entregar uma interface funcional em poucos minutos.
 
@@ -40,7 +43,7 @@ A análise considerou fatores como:
 
 ---
 
-## Outcome
+## Resultado
 
 O protótipo inicial foi gerado em menos de **5 minutos**, enquanto uma implementação manual com refinamento visual e estrutural poderia demandar aproximadamente **uma semana de trabalho**.
 
@@ -54,7 +57,7 @@ Este experimento demonstra o potencial da IA como ferramenta de apoio para:
 
 ---
 
-## Professional Reflection
+## Reflexão Profissional
 
 Como desenvolvedora Full Stack Plena, considero que o maior valor desse experimento não está apenas na velocidade, mas na capacidade de utilizar IA de forma estratégica dentro do ciclo de desenvolvimento.
 
@@ -69,7 +72,7 @@ A IA não substitui o papel do desenvolvedor, mas amplia significativamente a ca
 
 ---
 
-## Next Steps
+## Próximos passos
 
 Como evolução natural, este protótipo pode ser migrado para uma stack moderna, como:
 
